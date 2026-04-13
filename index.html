@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>加拿大本科新生见面会抽奖专区</title>
+  <title>加拿大本科新生线下见面会抽奖专区</title>
   <style>
     :root {
       --bg: #eef7ff;
@@ -17,7 +17,6 @@
       --border: rgba(120, 173, 225, 0.22);
       --shadow: 0 24px 60px rgba(74, 136, 201, 0.12);
       --shadow-soft: 0 12px 30px rgba(74, 136, 201, 0.08);
-      --shadow-strong: 0 28px 70px rgba(69, 134, 205, 0.18);
       --success: #2aa86f;
       --danger: #ff7f96;
     }
@@ -36,7 +35,9 @@
       min-height: 100%;
     }
 
-    body { overflow-x: hidden; }
+    body {
+      overflow-x: hidden;
+    }
 
     .page-bg-word {
       position: fixed;
@@ -48,7 +49,7 @@
       font-size: clamp(64px, 10vw, 170px);
       font-weight: 800;
       letter-spacing: 0.04em;
-      color: rgba(89, 175, 243, 0.11);
+      color: rgba(89, 175, 243, 0.14);
       pointer-events: none;
       user-select: none;
       z-index: 0;
@@ -60,7 +61,7 @@
       margin: 0 auto;
       position: relative;
       z-index: 1;
-      padding: 36px 0 54px;
+      padding: 36px 0 44px;
     }
 
     .glass {
@@ -88,7 +89,10 @@
 
     .hero-nav,
     .hero-main,
-    .hero-bottom { position: relative; z-index: 2; }
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+    }
 
     .hero-nav {
       display: flex;
@@ -132,7 +136,7 @@
 
     .hero-main {
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
+      grid-template-columns: 1.12fr 0.88fr;
       gap: 28px;
       align-items: center;
       min-height: 400px;
@@ -140,24 +144,23 @@
 
     .headline {
       margin: 0;
-      font-size: clamp(38px, 4.8vw, 74px);
-      line-height: 1.03;
-      letter-spacing: 0.02em;
+      font-size: clamp(42px, 5vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
       font-weight: 800;
-      max-width: 820px;
+      max-width: 760px;
     }
 
     .headline span {
       display: block;
-      margin-bottom: 6px;
     }
 
     .subtext {
-      margin-top: 22px;
-      font-size: 17px;
-      line-height: 1.85;
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.8;
       color: var(--text-soft);
-      max-width: 740px;
+      max-width: 720px;
     }
 
     .hero-actions {
@@ -180,8 +183,14 @@
       box-shadow: var(--shadow-soft);
     }
 
-    .btn:hover:not(:disabled) { transform: translateY(-1px); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--primary-deep));
@@ -194,7 +203,10 @@
       border: 1px solid rgba(108, 170, 231, 0.24);
     }
 
-    .hint-inline { color: var(--text-soft); font-size: 15px; }
+    .hint-inline {
+      color: var(--text-soft);
+      font-size: 15px;
+    }
 
     .mock-stage {
       position: relative;
@@ -220,7 +232,11 @@
       z-index: 3;
     }
 
-    .mock-small { width: 160px; padding: 16px; }
+    .mock-small {
+      width: 160px;
+      padding: 16px;
+    }
+
     .mock-a { top: 14%; left: 8%; }
     .mock-b { bottom: 12%; right: 6%; }
     .mock-c { top: 7%; right: 14%; }
@@ -238,9 +254,9 @@
     }
 
     .mock-title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 800;
-      line-height: 1.34;
+      line-height: 1.3;
       margin-bottom: 14px;
     }
 
@@ -265,9 +281,11 @@
       font-size: 15px;
     }
 
-    .section { margin-top: 28px; }
+    .section {
+      margin-top: 26px;
+    }
 
-    .section-header-split {
+    .section-title-wrap {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
       gap: 24px;
@@ -291,36 +309,30 @@
     }
 
     .prize-grid,
+    .product-grid,
+    .mentor-grid,
     .faq-grid {
       display: grid;
       gap: 18px;
     }
 
-    .prize-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .prize-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-grid,
+    .mentor-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
     .card {
       border-radius: 26px;
       padding: 22px;
       min-height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .prize-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.1));
-      pointer-events: none;
-    }
-
-    .prize-card > * { position: relative; z-index: 1; }
-
-    .prize-card.is-highlight {
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(241,248,255,0.88));
-      box-shadow: var(--shadow-strong);
-      border-color: rgba(95, 163, 232, 0.28);
     }
 
     .prize-badge {
@@ -345,6 +357,8 @@
     }
 
     .prize-meta,
+    .card-desc,
+    .mentor-text,
     .faq-answer {
       color: var(--text-soft);
       line-height: 1.8;
@@ -352,25 +366,8 @@
       margin: 0;
     }
 
-    .prize-art {
-      margin-top: 18px;
-      margin-bottom: 18px;
-      height: 100px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(105,184,255,0.16), rgba(255,255,255,0.76));
-      border: 1px solid rgba(132, 191, 245, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
-    }
-
-    .prize-art-icon {
-      font-size: 48px;
-      filter: saturate(0.9);
-    }
-
     .prize-count {
+      margin-top: 18px;
       display: inline-flex;
       padding: 10px 14px;
       border-radius: 999px;
@@ -379,26 +376,6 @@
       font-size: 14px;
       font-weight: 700;
       color: var(--text);
-    }
-
-    .brand-break {
-      margin: 24px 0 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .brand-break img {
-      max-width: min(520px, 72%);
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      opacity: 0.96;
-    }
-
-    .lottery-title-wrap {
-      margin-top: 22px;
-      margin-bottom: 18px;
     }
 
     .lottery-wrap {
@@ -424,7 +401,10 @@
       pointer-events: none;
     }
 
-    .lottery-main > * { position: relative; z-index: 1; }
+    .lottery-main > * {
+      position: relative;
+      z-index: 1;
+    }
 
     .lottery-topbar {
       display: flex;
@@ -513,38 +493,14 @@
       margin-bottom: 18px;
     }
 
-    .rolling-number,
-    .multi-numbers {
-      text-shadow: 0 10px 30px rgba(78, 150, 220, 0.12);
-      color: var(--text);
-    }
-
     .rolling-number {
       font-size: clamp(70px, 9vw, 148px);
       line-height: 1;
       font-weight: 800;
       letter-spacing: -0.04em;
+      color: var(--text);
       margin-bottom: 12px;
-    }
-
-    .multi-numbers {
-      display: flex;
-      justify-content: center;
-      gap: 22px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .number-chip {
-      min-width: 150px;
-      padding: 18px 24px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.78);
-      border: 1px solid rgba(132, 191, 245, 0.24);
-      font-size: clamp(48px, 6vw, 86px);
-      line-height: 1;
-      font-weight: 800;
-      box-shadow: var(--shadow-soft);
+      text-shadow: 0 10px 30px rgba(78, 150, 220, 0.12);
     }
 
     .winner-result {
@@ -557,7 +513,6 @@
       border: 1px solid var(--border);
       font-size: 16px;
       color: var(--text-soft);
-      line-height: 1.6;
     }
 
     .control-panel {
@@ -637,8 +592,15 @@
       gap: 4px;
     }
 
-    .progress-name { font-size: 15px; font-weight: 700; }
-    .progress-count { font-size: 13px; color: var(--text-soft); }
+    .progress-name {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .progress-count {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
 
     .winner-list {
       display: grid;
@@ -665,8 +627,16 @@
       gap: 5px;
     }
 
-    .winner-rank { font-size: 14px; color: var(--primary-deep); font-weight: 800; }
-    .winner-prize { font-size: 14px; color: var(--text-soft); }
+    .winner-rank {
+      font-size: 14px;
+      color: var(--primary-deep);
+      font-weight: 800;
+    }
+
+    .winner-prize {
+      font-size: 14px;
+      color: var(--text-soft);
+    }
 
     .winner-number-badge {
       min-width: 78px;
@@ -678,22 +648,6 @@
       font-size: 15px;
     }
 
-    .winner-number-badge.multi {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      min-width: auto;
-      border-radius: 18px;
-    }
-
-    .winner-number-badge.multi span {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(132, 191, 245, 0.2);
-    }
-
     .empty-state {
       padding: 20px;
       border-radius: 20px;
@@ -701,6 +655,39 @@
       color: var(--text-soft);
       background: rgba(255,255,255,0.62);
       border: 1px dashed rgba(124, 181, 228, 0.35);
+    }
+
+    .product-icon,
+    .mentor-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(105,184,255,0.2), rgba(233,247,255,0.8));
+      font-size: 28px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+
+    .mentor-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .mentor-name {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .mentor-role {
+      font-size: 14px;
+      color: var(--primary-deep);
+      font-weight: 700;
+      margin: 0;
     }
 
     .faq-item {
@@ -715,19 +702,26 @@
       line-height: 1.4;
     }
 
+    .bottom-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
     @media (max-width: 1180px) {
       .hero-main,
-      .section-header-split,
+      .section-title-wrap,
       .lottery-wrap {
         grid-template-columns: 1fr;
       }
 
       .prize-grid,
+      .product-grid,
+      .mentor-grid,
       .faq-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
-      .brand-break img { max-width: min(420px, 86%); }
     }
 
     @media (max-width: 760px) {
@@ -736,15 +730,29 @@
         padding-top: 18px;
       }
 
-      .hero { padding: 18px; }
+      .hero {
+        padding: 18px;
+      }
+
       .prize-grid,
+      .product-grid,
+      .mentor-grid,
       .faq-grid,
-      .stats-grid { grid-template-columns: 1fr; }
-      .lottery-main { min-height: auto; }
-      .rolling-number { font-size: 72px; }
-      .page-bg-word { top: 60px; }
-      .number-chip { min-width: 110px; font-size: 52px; }
-      .headline { letter-spacing: 0.01em; }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lottery-main {
+        min-height: auto;
+      }
+
+      .rolling-number {
+        font-size: 72px;
+      }
+
+      .page-bg-word {
+        top: 60px;
+      }
     }
   </style>
 </head>
@@ -768,20 +776,21 @@
             <span>抽奖现在开始！</span>
           </h1>
           <p class="subtext">
-            感谢各位家长与同学莅临本次加拿大本科新生线下见面会。
-            很高兴今天能和大家在线下相见，也感谢大家对得知课堂的支持与信任。接下来进入现场幸运抽奖环节，祝各位家长和同学都能收获一份惊喜与好运。
+            感谢各位家长与同学莅临本次加拿大本科新生线下见面会
+            接下来进入现场幸运抽奖环节
+            祝各位家长和同学都能收获一份惊喜与好运
           </p>
           <div class="hero-actions">
             <button class="btn btn-primary" onclick="document.getElementById('lottery-section').scrollIntoView({behavior:'smooth'})">进入抽奖区</button>
             <button class="btn btn-light" onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'})">查看规则</button>
-            <div class="hint-inline">建议现场全屏投放使用</div>
+            <div class="hint-inline"> </div>
           </div>
         </div>
 
         <div class="mock-stage">
           <div class="mock-card mock-main">
             <div class="mock-pill">Lucky Draw Moment</div>
-            <div class="mock-title">现场幸运抽奖环节<br>感谢各位家长与同学莅临见面会</div>
+            <div class="mock-title">现场幸运抽奖环节</div>
             <div class="mock-line"></div>
             <div class="mock-line mid"></div>
             <div class="mock-line short"></div>
@@ -811,12 +820,12 @@
 
       <div class="hero-bottom">
         <div>抽奖顺序：五等奖 → 四等奖 → 三等奖 → 二等奖 → 一等奖 → 特等奖</div>
-        <div>五等奖每轮同时抽出 3 个号码，两轮完成本档抽取</div>
+        <div>现场抽奖仅展示中奖结果，号码抽出后自动移出奖池，确保每组家庭仅可中奖一次</div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-header-split">
+      <div class="section-title-wrap">
         <h2 class="section-title">现场奖品设置</h2>
         <p class="section-desc">
           为感谢各位家长与同学到场支持，本次加拿大本科新生见面会特别准备了现场专属抽奖福利。
@@ -826,16 +835,9 @@
       <div class="prize-grid" id="prizeGrid"></div>
     </section>
 
-    <div class="brand-break">
-      <img src="20250606-114442.jpg" alt="得知课堂 Avantclass" />
-    </div>
-
     <section class="section" id="lottery-section">
-      <div class="lottery-title-wrap">
+      <div class="section-title-wrap">
         <h2 class="section-title">现场抽奖环节</h2>
-      </div>
-      <div class="section-header-split">
-        <div></div>
         <p class="section-desc">
           本场抽奖采用编号方式进行，活动开始前将为 30 组家庭发放对应号码。
           主持人点击“开始滚动”后，号码会在大屏中滚动；点击“停止抽奖”后，本轮中奖号码即锁定并自动计入中奖名单，便于现场展示与后续记录分享。
@@ -850,16 +852,14 @@
               <div class="round-label">奖项剩余：<span id="currentPrizeRemain">6</span></div>
               <div class="status-pill stopped" id="statusPill">待开始</div>
             </div>
-            <div class="round-label">抽奖顺序固定 · 号码实时更新</div>
+            <div class="round-label">抽奖顺序固定 · 号码池实时更新</div>
           </div>
 
           <div class="draw-stage">
             <div class="rolling-area">
               <div class="rolling-tip">Lucky Draw For Families & Students</div>
               <div class="winner-label" id="winnerLabel">准备开奖</div>
-              <div id="numberDisplay">
-                <div class="rolling-number" id="rollingNumber">01</div>
-              </div>
+              <div class="rolling-number" id="rollingNumber">01</div>
               <div class="winner-result" id="winnerResult">点击下方按钮开始本轮抽奖</div>
             </div>
           </div>
@@ -912,8 +912,10 @@
       </div>
     </section>
 
+    
+
     <section class="section" id="faq-section">
-      <div class="section-header-split">
+      <div class="section-title-wrap">
         <h2 class="section-title">现场说明</h2>
         <p class="section-desc">
           下面这部分按现场家长和同学更容易理解的方式整理成简明说明，方便投屏展示，也方便后续保存为活动素材发布到社交平台。
@@ -937,18 +939,19 @@
           <p class="faq-answer">不会。页面只展示中奖号码与最终中奖名单，不会逐一显示未中奖结果，整体视觉会更简洁，也更适合现场展示。</p>
         </div>
       </div>
+      <div class="bottom-note">感谢各位家长与同学莅临见面会，祝大家在接下来的抽奖环节中收获属于自己的好运与惊喜。</div>
     </section>
   </div>
 
   <script>
     const prizeConfig = [
-      { rank: '五等奖', name: '磁吸卡套', count: 6, perDraw: 3, icon: '🪪', desc: '希望这份实用的小礼物，能陪伴大家开启接下来的加拿大校园生活。', badge: 'Fifth Prize', highlight: false },
-      { rank: '四等奖', name: 'Jellycat', count: 2, perDraw: 1, icon: '🧸', desc: '愿这份可爱的惊喜，为即将出发的留学旅程增添一点轻松和好运。', badge: 'Fourth Prize', highlight: false },
-      { rank: '三等奖', name: '1000代金券', count: 2, perDraw: 1, icon: '🎫', desc: '希望能为大家接下来的学业准备和入学规划，提供一份实实在在的支持。', badge: 'Third Prize', highlight: false },
-      { rank: '二等奖', name: 'AirPods耳机', count: 1, perDraw: 1, icon: '🎧', desc: '无论是通勤、上课还是独自适应新环境，都希望它能陪伴你更安心地开启加拿大生活。', badge: 'Second Prize', highlight: true },
-      { rank: '一等奖', name: 'ChatGPT会员（一年）', count: 1, perDraw: 1, icon: '✨', desc: '愿它在未来的学习、查资料和适应海外课程节奏时，成为你的一份高效助力。', badge: 'First Prize', highlight: true },
-      { rank: '特等奖', name: '免费先修课 ×1【价值10000】', count: 1, perDraw: 1, icon: '🎓', desc: '希望这份特别的礼物，能帮助你在正式入学前更从容地衔接课程、迎接加拿大本科生活。', badge: 'Grand Prize', highlight: true }
-    ];
+  { rank: '五等奖', name: '磁吸卡套', count: 6, desc: '希望这份实用的小礼物，能陪伴大家开启接下来的加拿大校园生活。', badge: 'Fifth Prize' },
+  { rank: '四等奖', name: 'Jellycat', count: 2, desc: '愿这份可爱的惊喜，为即将出发的留学旅程增添一点轻松和好运。', badge: 'Fourth Prize' },
+  { rank: '三等奖', name: '1000代金券', count: 2, desc: '希望能为大家接下来的学业准备和入学规划，提供一份实实在在的支持。', badge: 'Third Prize' },
+  { rank: '二等奖', name: 'AirPods耳机', count: 1, desc: '无论是通勤、上课还是独自适应新环境，都希望它能陪伴你更安心地开启加拿大生活。', badge: 'Second Prize' },
+  { rank: '一等奖', name: 'ChatGPT会员（一年）', count: 1, desc: '愿它在未来的学习、查资料和适应海外课程节奏时，成为你的一份高效助力。', badge: 'First Prize' },
+  { rank: '特等奖', name: '免费先修课 ×1【价值10000】', count: 1, desc: '希望这份特别的礼物，能帮助你在正式入学前更从容地衔接课程、迎接加拿大本科生活。', badge: 'Grand Prize' }
+];
 
     const totalFamilies = 30;
     let numberPool = [];
@@ -958,7 +961,7 @@
     let winners = [];
     let rollingTimer = null;
     let isRolling = false;
-    let currentDisplay = ['01'];
+    let currentDisplay = '01';
 
     const prizeGrid = document.getElementById('prizeGrid');
     const prizeProgress = document.getElementById('prizeProgress');
@@ -966,7 +969,7 @@
     const currentPrizeName = document.getElementById('currentPrizeName');
     const currentPrizeRemain = document.getElementById('currentPrizeRemain');
     const statusPill = document.getElementById('statusPill');
-    const numberDisplay = document.getElementById('numberDisplay');
+    const rollingNumber = document.getElementById('rollingNumber');
     const winnerLabel = document.getElementById('winnerLabel');
     const winnerResult = document.getElementById('winnerResult');
     const progressNote = document.getElementById('progressNote');
@@ -985,33 +988,12 @@
       numberPool = Array.from({ length: totalFamilies }, (_, i) => padNumber(i + 1));
     }
 
-    function renderDisplay(values) {
-      if (!Array.isArray(values)) values = [values];
-      if (values.length <= 1) {
-        numberDisplay.innerHTML = `<div class="rolling-number">${values[0] ?? '--'}</div>`;
-        return;
-      }
-      numberDisplay.innerHTML = `
-        <div class="multi-numbers">
-          ${values.map(v => `<div class="number-chip">${v}</div>`).join('')}
-        </div>
-      `;
-    }
-
-    function pickRandomSet(count) {
-      const shuffled = [...numberPool].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, count);
-    }
-
     function renderPrizeCards() {
       prizeGrid.innerHTML = prizeConfig.map(item => `
-        <div class="card glass prize-card ${item.highlight ? 'is-highlight' : ''}">
+        <div class="card glass">
           <div class="prize-badge">${item.badge}</div>
           <h3 class="prize-name">${item.rank} · ${item.name}</h3>
           <p class="prize-meta">${item.desc}</p>
-          <div class="prize-art">
-            <div class="prize-art-icon">${item.icon}</div>
-          </div>
           <div class="prize-count">本档奖项数量：${item.count}</div>
         </div>
       `).join('');
@@ -1019,7 +1001,7 @@
 
     function renderPrizeProgress() {
       prizeProgress.innerHTML = prizeConfig.map((item, index) => {
-        const wonInThisPrize = winners.reduce((sum, w) => w.rank === item.rank ? sum + w.numbers.length : sum, 0);
+        const wonInThisPrize = winners.filter(w => w.rank === item.rank).length;
         const remain = item.count - wonInThisPrize;
         const active = index === currentPrizeIndex;
         return `
@@ -1046,11 +1028,7 @@
             <div class="winner-rank">${item.rank}</div>
             <div class="winner-prize">${item.prize}</div>
           </div>
-          <div class="winner-number-badge ${item.numbers.length > 1 ? 'multi' : ''}">
-            ${item.numbers.length > 1
-              ? item.numbers.map(n => `<span>${n}号</span>`).join('')
-              : `${item.numbers[0]}号家庭`}
-          </div>
+          <div class="winner-number-badge">${item.number}号家庭</div>
         </div>
       `).join('');
     }
@@ -1063,7 +1041,7 @@
       drawnCount.textContent = drawnTotal;
       remainingCount.textContent = numberPool.length;
       progressNote.textContent = currentPrize
-        ? `当前已抽出 ${drawnTotal} / 13 个中奖名额，剩余可抽号码 ${numberPool.length} 个`
+        ? `当前为第 ${drawnTotal + 1} / 13 次抽奖，剩余可抽号码 ${numberPool.length} 个`
         : '全部奖项已抽取完成，中奖名单已生成。';
       renderPrizeProgress();
       renderWinnerList();
@@ -1075,7 +1053,7 @@
         statusPill.textContent = '已完成';
         statusPill.className = 'status-pill running';
         winnerLabel.textContent = '本场抽奖已结束';
-        winnerResult.textContent = '13 个中奖名额已全部抽出';
+        winnerResult.textContent = '13 个中奖号码已全部抽出';
       }
     }
 
@@ -1092,21 +1070,20 @@
 
     function startRolling() {
       if (isRolling || !prizeConfig[currentPrizeIndex] || numberPool.length === 0) return;
-      const currentPrize = prizeConfig[currentPrizeIndex];
-      const batchCount = Math.min(currentPrize.perDraw, numberPool.length);
       isRolling = true;
       startBtn.disabled = true;
       stopBtn.disabled = false;
       nextBtn.disabled = true;
       statusPill.textContent = '滚动中';
       statusPill.className = 'status-pill running';
-      winnerLabel.textContent = `正在抽取 ${currentPrize.rank}`;
-      winnerResult.textContent = currentPrize.perDraw > 1 ? '本轮将同时抽出 3 个中奖号码' : '请在合适的时机点击“停止抽奖”';
+      winnerLabel.textContent = `正在抽取 ${prizeConfig[currentPrizeIndex].rank}`;
+      winnerResult.textContent = '请在合适的时机点击“停止抽奖”';
 
       rollingTimer = setInterval(() => {
-        currentDisplay = pickRandomSet(batchCount);
-        renderDisplay(currentDisplay);
-      }, 80);
+        const randomIndex = Math.floor(Math.random() * numberPool.length);
+        currentDisplay = numberPool[randomIndex];
+        rollingNumber.textContent = currentDisplay;
+      }, 70);
     }
 
     function stopRolling() {
@@ -1115,27 +1092,23 @@
       rollingTimer = null;
       isRolling = false;
 
+      const hitIndex = numberPool.indexOf(currentDisplay);
+      if (hitIndex !== -1) {
+        numberPool.splice(hitIndex, 1);
+      }
+
       const currentPrize = prizeConfig[currentPrizeIndex];
-      const numbers = Array.isArray(currentDisplay) ? currentDisplay : [currentDisplay];
-
-      numbers.forEach(number => {
-        const hitIndex = numberPool.indexOf(number);
-        if (hitIndex !== -1) numberPool.splice(hitIndex, 1);
-      });
-
       winners.push({
         rank: currentPrize.rank,
         prize: currentPrize.name,
-        numbers: numbers
+        number: currentDisplay
       });
 
-      currentPrizeDrawnCount += numbers.length;
-      drawnTotal += numbers.length;
+      currentPrizeDrawnCount += 1;
+      drawnTotal += 1;
 
       winnerLabel.textContent = `${currentPrize.rank} 中奖号码`;
-      winnerResult.textContent = numbers.length > 1
-        ? `${numbers.map(n => `${n}号家庭`).join('、')} · 恭喜获得 ${currentPrize.name}`
-        : `${numbers[0]}号家庭 · 恭喜获得 ${currentPrize.name}`;
+      winnerResult.textContent = `${currentDisplay}号家庭 · 恭喜获得 ${currentPrize.name}`;
       statusPill.textContent = '已锁定';
       statusPill.className = 'status-pill stopped';
       stopBtn.disabled = true;
@@ -1166,8 +1139,7 @@
         return;
       }
 
-      currentDisplay = [numberPool[0] || '--'];
-      renderDisplay(currentDisplay);
+      rollingNumber.textContent = numberPool[0] || '--';
       winnerLabel.textContent = `准备抽取 ${nextPrize.rank}`;
       setIdleState(`当前奖项已切换为 ${nextPrize.rank}，点击开始继续抽奖`);
       updateStatus();
@@ -1180,8 +1152,7 @@
       drawnTotal = 0;
       winners = [];
       initNumberPool();
-      currentDisplay = ['01'];
-      renderDisplay(currentDisplay);
+      rollingNumber.textContent = '01';
       winnerLabel.textContent = '准备开奖';
       setIdleState('点击下方按钮开始本轮抽奖');
       nextBtn.disabled = true;
@@ -1199,7 +1170,7 @@
       renderPrizeProgress();
       renderWinnerList();
       updateStatus();
-      renderDisplay(['01']);
+      rollingNumber.textContent = '01';
       setIdleState();
     }
 
