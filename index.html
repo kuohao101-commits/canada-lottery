@@ -1,269 +1,1245 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 加拿大本科新生见面会抽奖</title>
-    <style>
-        :root {
-            --u-blue: #002147; /* 经典学术蓝 */
-            --u-red: #C53030;  /* 枫叶红 */
-            --bg-gray: #f9fafb;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>加拿大本科新生线下见面会抽奖专区</title>
+  <style>
+    :root {
+      --bg: #eef7ff;
+      --bg-2: #f7fbff;
+      --primary: #69b8ff;
+      --primary-deep: #2e89da;
+      --primary-soft: rgba(105, 184, 255, 0.15);
+      --text: #123a63;
+      --text-soft: #5c7a98;
+      --white: rgba(255, 255, 255, 0.88);
+      --border: rgba(120, 173, 225, 0.22);
+      --shadow: 0 24px 60px rgba(74, 136, 201, 0.12);
+      --shadow-soft: 0 12px 30px rgba(74, 136, 201, 0.08);
+      --success: #2aa86f;
+      --danger: #ff7f96;
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Helvetica Neue', 'PingFang SC', sans-serif;
-            background-color: var(--bg-gray);
-            color: var(--u-blue);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            /* 背景装饰：淡淡的枫叶元素 */
-            background-image: radial-gradient(circle at 90% 10%, rgba(197, 48, 48, 0.05) 0%, transparent 20%),
-                              radial-gradient(circle at 10% 90%, rgba(0, 33, 71, 0.05) 0%, transparent 20%);
-        }
+    * { box-sizing: border-box; }
 
-        .main-card {
-            background: white;
-            width: 900px;
-            padding: 50px;
-            border-radius: 24px;
-            box-shadow: 0 10px 50px rgba(0, 33, 71, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(163, 216, 255, 0.75), transparent 30%),
+        radial-gradient(circle at top right, rgba(182, 231, 255, 0.7), transparent 30%),
+        linear-gradient(180deg, #e8f5ff 0%, #f7fbff 42%, #eef7ff 100%);
+      color: var(--text);
+      min-height: 100%;
+    }
 
-        /* 装饰线条 */
-        .main-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--u-blue), var(--u-red));
-        }
+    body {
+      overflow-x: hidden;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+    .page-bg-word {
+      position: fixed;
+      top: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+      font-size: clamp(64px, 10vw, 170px);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: rgba(89, 175, 243, 0.14);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      white-space: nowrap;
+    }
 
-        h1 {
-            font-size: 28px;
-            letter-spacing: 2px;
-            margin: 0;
-            font-weight: 500;
-        }
+    .container {
+      width: min(1440px, calc(100vw - 48px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding: 36px 0 44px;
+    }
 
-        .subtitle {
-            font-size: 14px;
-            color: #718096;
-            margin-top: 10px;
-            text-transform: uppercase;
-        }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.74));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
 
-        #prize-title {
-            font-size: 20px;
-            color: var(--u-red);
-            margin: 20px 0;
-            font-weight: bold;
-        }
+    .hero {
+      border-radius: 34px;
+      padding: 28px 28px 22px;
+      overflow: hidden;
+      position: relative;
+    }
 
-        /* 抽奖展示区 */
-        .display-area {
-            min-height: 200px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 20px;
-        }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99,174,255,0.45), rgba(190,232,255,0.12) 58%, rgba(255,255,255,0.35));
+      pointer-events: none;
+    }
 
-        .name-card {
-            font-size: 42px;
-            font-weight: 600;
-            color: var(--u-blue);
-            transition: all 0.2s;
-        }
+    .hero-nav,
+    .hero-main,
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+    }
 
-        .multi-winner {
-            font-size: 24px;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
 
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text);
+    }
 
-        /* 按钮控制 */
-        .btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #6ab7ff, #dff5ff);
+      color: white;
+      box-shadow: var(--shadow-soft);
+      font-size: 18px;
+      font-weight: 800;
+    }
 
-        button {
-            padding: 14px 45px;
-            font-size: 16px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
+    .hero-tag {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.8);
+      color: var(--text-soft);
+      font-size: 14px;
+      box-shadow: var(--shadow-soft);
+    }
 
-        .btn-start { background: var(--u-blue); color: white; }
-        .btn-start:hover { background: #003366; transform: translateY(-2px); }
-        .btn-stop { background: var(--u-red); color: white; }
-        .btn-stop:hover { opacity: 0.9; }
-        button:disabled { background: #e2e8f0; color: #a0aec0; cursor: not-allowed; transform: none; }
+    .hero-main {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 28px;
+      align-items: center;
+      min-height: 400px;
+    }
 
-        /* 中奖记录 */
-        .history {
-            margin-top: 40px;
-            border-top: 1px solid #edf2f7;
-            padding-top: 20px;
-            text-align: left;
-            max-height: 200px;
-            overflow-y: auto;
-        }
+    .headline {
+      margin: 0;
+      font-size: clamp(42px, 5vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      max-width: 760px;
+    }
 
-        .history h3 { font-size: 16px; color: #4a5568; }
-        .history-item { font-size: 14px; margin-bottom: 8px; color: #2d3748; }
-        .history-item span { color: var(--u-red); font-weight: bold; margin-right: 10px; }
-    </style>
+    .headline span {
+      display: block;
+    }
+
+    .subtext {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text-soft);
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 16px 26px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      color: white;
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.8);
+      color: var(--text);
+      border: 1px solid rgba(108, 170, 231, 0.24);
+    }
+
+    .hint-inline {
+      color: var(--text-soft);
+      font-size: 15px;
+    }
+
+    .mock-stage {
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-card {
+      position: absolute;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.95);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .mock-main {
+      width: min(420px, 90%);
+      padding: 24px;
+      z-index: 3;
+    }
+
+    .mock-small {
+      width: 160px;
+      padding: 16px;
+    }
+
+    .mock-a { top: 14%; left: 8%; }
+    .mock-b { bottom: 12%; right: 6%; }
+    .mock-c { top: 7%; right: 14%; }
+    .mock-d { bottom: 18%; left: 6%; width: 220px; }
+
+    .mock-pill {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(105, 184, 255, 0.16);
+      color: var(--primary-deep);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .mock-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .mock-line {
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(105, 184, 255, 0.35), rgba(218, 242, 255, 0.6));
+      margin-bottom: 10px;
+    }
+
+    .mock-line.short { width: 56%; }
+    .mock-line.mid { width: 72%; }
+
+    .hero-bottom {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--text-soft);
+      font-size: 15px;
+    }
+
+    .section {
+      margin-top: 26px;
+    }
+
+    .section-title-wrap {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3vw, 46px);
+      line-height: 1.12;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .section-desc {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .prize-grid,
+    .product-grid,
+    .mentor-grid,
+    .faq-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .prize-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-grid,
+    .mentor-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border-radius: 26px;
+      padding: 22px;
+      min-height: 100%;
+    }
+
+    .prize-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-deep);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .prize-name,
+    .card-title {
+      font-size: 24px;
+      line-height: 1.25;
+      font-weight: 800;
+      margin: 0 0 10px;
+    }
+
+    .prize-meta,
+    .card-desc,
+    .mentor-text,
+    .faq-answer {
+      color: var(--text-soft);
+      line-height: 1.8;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .prize-count {
+      margin-top: 18px;
+      display: inline-flex;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .lottery-wrap {
+      display: grid;
+      grid-template-columns: 1.22fr 0.78fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .lottery-main {
+      padding: 24px;
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+      min-height: 690px;
+    }
+
+    .lottery-main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(111,183,255,0.18), rgba(255,255,255,0.02));
+      pointer-events: none;
+    }
+
+    .lottery-main > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lottery-topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .current-round {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .round-label,
+    .status-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .status-pill.running {
+      color: var(--success);
+      border-color: rgba(42,168,111,0.2);
+      background: rgba(42,168,111,0.08);
+    }
+
+    .status-pill.stopped {
+      color: var(--danger);
+      border-color: rgba(255,127,150,0.2);
+      background: rgba(255,127,150,0.08);
+    }
+
+    .draw-stage {
+      min-height: 430px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(245,250,255,0.88));
+      border: 1px solid rgba(146, 196, 240, 0.2);
+      display: grid;
+      place-items: center;
+      padding: 26px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .draw-stage::before,
+    .draw-stage::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(136, 205, 255, 0.25), transparent 70%);
+      pointer-events: none;
+    }
+
+    .draw-stage::before { width: 300px; height: 300px; top: -80px; right: -40px; }
+    .draw-stage::after { width: 260px; height: 260px; bottom: -100px; left: -50px; }
+
+    .rolling-area {
+      text-align: center;
+      width: 100%;
+    }
+
+    .rolling-tip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(105, 184, 255, 0.14);
+      color: var(--primary-deep);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .winner-label {
+      font-size: 18px;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+
+    .rolling-number {
+      font-size: clamp(70px, 9vw, 148px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 12px;
+      text-shadow: 0 10px 30px rgba(78, 150, 220, 0.12);
+    }
+
+    .winner-result {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--border);
+      font-size: 16px;
+      color: var(--text-soft);
+    }
+
+    .control-panel {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .progress-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 15px;
+    }
+
+    .lottery-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mini-card {
+      padding: 22px;
+      border-radius: 26px;
+    }
+
+    .mini-title {
+      margin: 0 0 14px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat-box {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--border);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .prize-progress {
+      display: grid;
+      gap: 12px;
+    }
+
+    .progress-item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .progress-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .progress-name {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .progress-count {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .winner-list {
+      display: grid;
+      gap: 12px;
+      max-height: 420px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .winner-item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .winner-item-left {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .winner-rank {
+      font-size: 14px;
+      color: var(--primary-deep);
+      font-weight: 800;
+    }
+
+    .winner-prize {
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .winner-number-badge {
+      min-width: 78px;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(105,184,255,0.18), rgba(255,255,255,0.8));
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .empty-state {
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      color: var(--text-soft);
+      background: rgba(255,255,255,0.62);
+      border: 1px dashed rgba(124, 181, 228, 0.35);
+    }
+
+    .product-icon,
+    .mentor-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(105,184,255,0.2), rgba(233,247,255,0.8));
+      font-size: 28px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+
+    .mentor-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .mentor-name {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .mentor-role {
+      font-size: 14px;
+      color: var(--primary-deep);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .faq-item {
+      padding: 22px;
+      border-radius: 24px;
+    }
+
+    .faq-question {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .bottom-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-main,
+      .section-title-wrap,
+      .lottery-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .prize-grid,
+      .product-grid,
+      .mentor-grid,
+      .faq-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100vw - 24px, 100%);
+        padding-top: 18px;
+      }
+
+      .hero {
+        padding: 18px;
+      }
+
+      .prize-grid,
+      .product-grid,
+      .mentor-grid,
+      .faq-grid,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lottery-main {
+        min-height: auto;
+      }
+
+      .rolling-number {
+        font-size: 72px;
+      }
+
+      .page-bg-word {
+        top: 60px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page-bg-word">LUCKY DRAW</div>
 
-<div class="main-card">
-    <header>
-        <div class="subtitle">Freshman Meetup · Undergraduate Canada</div>
-        <h1>2026 加拿大本科新生见面会抽奖</h1>
-        <div id="prize-title">当前环节：五等奖（磁吸卡套 x6）</div>
-    </header>
+  <div class="container">
+    <section class="hero glass">
+      <div class="hero-nav">
+        <div class="brand">
+          <div class="brand-mark">得</div>
+          <div>加拿大本科新生线下见面会</div>
+        </div>
+        <div class="hero-tag">30组家庭专属抽奖 · 蓝白简约大屏版</div>
+      </div>
 
-    <div class="display-area" id="displayBoard">
-        <div class="name-card" id="mainDisplay">Ready</div>
-    </div>
+      <div class="hero-main">
+        <div>
+          <h1 class="headline">
+            <span>Welcome. Draw.</span>
+            <span>Celebrate. 好运现在开始。</span>
+          </h1>
+          <p class="subtext">
+            这是为加拿大本科新生线下见面会准备的现场抽奖专区。
+            本场共开放 30 组家庭参与抽奖，系统按奖项顺序依次开奖，中奖号码自动移出奖池，确保每组家庭仅可中奖一次。
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="document.getElementById('lottery-section').scrollIntoView({behavior:'smooth'})">进入抽奖区</button>
+            <button class="btn btn-light" onclick="document.getElementById('faq-section').scrollIntoView({behavior:'smooth'})">查看规则</button>
+            <div class="hint-inline">建议现场全屏投放使用</div>
+          </div>
+        </div>
 
-    <div class="btns">
-        <button id="startBtn" class="btn-start" onclick="startRolling()">开始抽奖</button>
-        <button id="stopBtn" class="btn-stop" onclick="stopRolling()" disabled>停止</button>
-    </div>
+        <div class="mock-stage">
+          <div class="mock-card mock-main">
+            <div class="mock-pill">Live Draw Event</div>
+            <div class="mock-title">大屏现场抽奖版<br>从五等奖到特等奖依次开奖</div>
+            <div class="mock-line"></div>
+            <div class="mock-line mid"></div>
+            <div class="mock-line short"></div>
+          </div>
+          <div class="mock-card mock-small mock-a">
+            <div class="mock-pill">Prize</div>
+            <div style="font-size: 28px; font-weight: 800;">13</div>
+            <div style="margin-top: 6px; color: var(--text-soft); font-size: 13px;">总中奖名额</div>
+          </div>
+          <div class="mock-card mock-small mock-b">
+            <div class="mock-pill">Pool</div>
+            <div style="font-size: 28px; font-weight: 800;">30</div>
+            <div style="margin-top: 6px; color: var(--text-soft); font-size: 13px;">初始抽奖号码</div>
+          </div>
+          <div class="mock-card mock-small mock-c">
+            <div class="mock-pill">Rule</div>
+            <div style="font-size: 18px; font-weight: 800; line-height:1.4;">每组家庭<br>仅可中奖一次</div>
+          </div>
+          <div class="mock-card mock-d">
+            <div class="mock-pill">Flow</div>
+            <div class="mock-line"></div>
+            <div class="mock-line short"></div>
+            <div class="mock-line mid"></div>
+          </div>
+        </div>
+      </div>
 
-    <div class="history">
-        <h3>荣誉名单 Winners List</h3>
-        <div id="historyLog"></div>
-    </div>
-</div>
+      <div class="hero-bottom">
+        <div>抽奖顺序：五等奖 → 四等奖 → 三等奖 → 二等奖 → 一等奖 → 特等奖</div>
+        <div>页面支持：开始 / 停止抽奖、中奖名单实时记录、剩余奖品数展示、号码自动移除</div>
+      </div>
+    </section>
 
-<script>
-    // 1. 初始化30组家庭名单
-    let families = Array.from({length: 30}, (_, i) => `家庭 ${i + 1}`);
-    
-    // 2. 奖品配置 (按抽取顺序排列)
-    // 重点：五等奖 count 为 6
+    <section class="section">
+      <div class="section-title-wrap">
+        <h2 class="section-title">本场奖品设置</h2>
+        <p class="section-desc">
+          本场线下见面会共设 6 档奖项，合计 13 个中奖名额。
+          页面会实时显示各奖项剩余数量，抽出后的号码将自动从奖池中移除，避免重复中奖。
+        </p>
+      </div>
+      <div class="prize-grid" id="prizeGrid"></div>
+    </section>
+
+    <section class="section" id="lottery-section">
+      <div class="section-title-wrap">
+        <h2 class="section-title">现场抽奖主控台</h2>
+        <p class="section-desc">
+          页面默认使用编号抽奖模式。活动开始前为 30 组家庭发放对应号码即可。
+          主持人点击“开始滚动”后，号码会在大屏中滚动；点击“停止抽奖”后，本轮中奖号码即锁定并自动计入对应奖项名单。
+        </p>
+      </div>
+
+      <div class="lottery-wrap">
+        <div class="lottery-main glass">
+          <div class="lottery-topbar">
+            <div class="current-round">
+              <div class="round-label">当前奖项：<span id="currentPrizeName">五等奖</span></div>
+              <div class="round-label">奖项剩余：<span id="currentPrizeRemain">6</span></div>
+              <div class="status-pill stopped" id="statusPill">待开始</div>
+            </div>
+            <div class="round-label">抽奖顺序固定 · 号码池实时更新</div>
+          </div>
+
+          <div class="draw-stage">
+            <div class="rolling-area">
+              <div class="rolling-tip">Canada Undergraduate Meetup Lucky Draw</div>
+              <div class="winner-label" id="winnerLabel">准备开奖</div>
+              <div class="rolling-number" id="rollingNumber">01</div>
+              <div class="winner-result" id="winnerResult">点击下方按钮开始本轮抽奖</div>
+            </div>
+          </div>
+
+          <div class="control-panel">
+            <button class="btn btn-primary" id="startBtn">开始滚动</button>
+            <button class="btn btn-light" id="stopBtn" disabled>停止抽奖</button>
+            <button class="btn btn-light" id="nextBtn" disabled>进入下一奖项</button>
+            <button class="btn btn-light" id="resetBtn">重置本场抽奖</button>
+          </div>
+
+          <div class="progress-note" id="progressNote">当前为第 1 / 13 次抽奖，剩余可抽号码 30 个</div>
+        </div>
+
+        <div class="lottery-side">
+          <div class="mini-card glass">
+            <h3 class="mini-title">现场总览</h3>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-label">总号码数</div>
+                <div class="stat-value">30</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">总中奖名额</div>
+                <div class="stat-value">13</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">已抽出</div>
+                <div class="stat-value" id="drawnCount">0</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">剩余号码</div>
+                <div class="stat-value" id="remainingCount">30</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-card glass">
+            <h3 class="mini-title">奖项剩余情况</h3>
+            <div class="prize-progress" id="prizeProgress"></div>
+          </div>
+
+          <div class="mini-card glass">
+            <h3 class="mini-title">已中奖名单</h3>
+            <div class="winner-list" id="winnerList">
+              <div class="empty-state">当前还没有产生中奖号码</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title-wrap">
+        <h2 class="section-title">活动相关产品</h2>
+        <p class="section-desc">
+          页面保留了你提到的“产品介绍”区块，方便你在抽奖页里同步展示品牌服务与活动信息。
+          目前先用加本业务主力产品做演示，后续你可以直接替换文案。
+        </p>
+      </div>
+      <div class="product-grid">
+        <div class="card glass">
+          <div class="product-icon">📘</div>
+          <h3 class="card-title">新生选课咨询与规划</h3>
+          <p class="card-desc">帮助新生提前了解课程体系、专业方向与排课逻辑，降低开学后的信息差与试错成本。</p>
+        </div>
+        <div class="card glass">
+          <div class="product-icon">🎓</div>
+          <h3 class="card-title">暑期先修课</h3>
+          <p class="card-desc">围绕加本主流基础课程做衔接，帮助学生在正式开学前先建立知识框架与学习节奏。</p>
+        </div>
+        <div class="card glass">
+          <div class="product-icon">📈</div>
+          <h3 class="card-title">1v1稳分辅导</h3>
+          <p class="card-desc">针对课程难点、作业、Quiz、Midterm 与 Final 做同步陪跑，帮助学生稳住 GPA 与学习状态。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title-wrap">
+        <h2 class="section-title">导师介绍</h2>
+        <p class="section-desc">
+          页面默认放入了 3 位适合当前加拿大本科业务场景的导师介绍。你后续可以替换头像、头衔、简介和展示顺序。
+        </p>
+      </div>
+      <div class="mentor-grid">
+        <div class="card glass">
+          <div class="mentor-head">
+            <div class="mentor-avatar">✨</div>
+            <div>
+              <h3 class="mentor-name">水晶学姐</h3>
+              <p class="mentor-role">多大统计 Specialist · GPA3.8+ · 学业规划导师</p>
+            </div>
+          </div>
+          <p class="mentor-text">擅长 GPA 逆袭、课程规划与学习节奏搭建，适合放在见面会活动页中增强专业感与信任感。</p>
+        </div>
+        <div class="card glass">
+          <div class="mentor-head">
+            <div class="mentor-avatar">💎</div>
+            <div>
+              <h3 class="mentor-name">Vicky学姐</h3>
+              <p class="mentor-role">UofT Commerce · Oxford 金融硕士</p>
+            </div>
+          </div>
+          <p class="mentor-text">擅长课程辅导、学习规划与陪跑式内容表达，适合在新生活动中做品牌老师展示与可信度背书。</p>
+        </div>
+        <div class="card glass">
+          <div class="mentor-head">
+            <div class="mentor-avatar">🧠</div>
+            <div>
+              <h3 class="mentor-name">宋老师</h3>
+              <p class="mentor-role">数学竞赛导师 · 长期主讲欧几里得方向</p>
+            </div>
+          </div>
+          <p class="mentor-text">适合补充品牌导师矩阵形象，让页面在抽奖之外仍保留完整的活动信息与机构专业感。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq-section">
+      <div class="section-title-wrap">
+        <h2 class="section-title">FAQ</h2>
+        <p class="section-desc">
+          下面这部分已经按你的抽奖规则写成现场版 FAQ，方便你直接投屏或后续补充进活动落地页里。
+        </p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item glass">
+          <h3 class="faq-question">Q1：本场共有多少组家庭参与抽奖？</h3>
+          <p class="faq-answer">本场加拿大本科新生线下见面会共开放 30 组家庭参与抽奖，每组家庭对应 1 个抽奖号码。</p>
+        </div>
+        <div class="faq-item glass">
+          <h3 class="faq-question">Q2：一个号码可以重复中奖吗？</h3>
+          <p class="faq-answer">不可以。每组家庭仅可中奖一次，一旦抽中，该号码会自动从奖池中移除。</p>
+        </div>
+        <div class="faq-item glass">
+          <h3 class="faq-question">Q3：抽奖顺序是怎样的？</h3>
+          <p class="faq-answer">页面默认按五等奖 → 四等奖 → 三等奖 → 二等奖 → 一等奖 → 特等奖的顺序依次开奖，便于现场氛围逐步提升。</p>
+        </div>
+        <div class="faq-item glass">
+          <h3 class="faq-question">Q4：会不会显示未中奖结果？</h3>
+          <p class="faq-answer">不会。页面只展示每轮抽中的中奖号码与最终中奖名单，不会逐一显示未中奖结果。</p>
+        </div>
+      </div>
+      <div class="bottom-note">现场使用建议：抽奖前先发放 01–30 号家庭编号牌，再以主持人统一操作大屏抽奖。</div>
+    </section>
+  </div>
+
+  <script>
     const prizeConfig = [
-        { name: "五等奖 (磁吸卡套)", count: 6, isMulti: true }, 
-        { name: "四等奖 (Jellycat)", count: 1, isMulti: false },
-        { name: "四等奖 (Jellycat)", count: 1, isMulti: false },
-        { name: "三等奖 (1000代金券)", count: 1, isMulti: false },
-        { name: "三等奖 (1000代金券)", count: 1, isMulti: false },
-        { name: "二等奖 (Airpods耳机)", count: 1, isMulti: false },
-        { name: "一等奖 (ChatGPT会员)", count: 1, isMulti: false },
-        { name: "特等奖 (免费先修课)", count: 1, isMulti: false }
+      { rank: '五等奖', name: '磁吸卡套', count: 6, desc: '精致实用，到场家庭均可参与角逐。', badge: 'Fifth Prize' },
+      { rank: '四等奖', name: 'Jellycat', count: 2, desc: '活动氛围感礼物，适合现场展示与互动。', badge: 'Fourth Prize' },
+      { rank: '三等奖', name: '1000代金券', count: 2, desc: '可用于指定服务抵扣，提升后续转化承接。', badge: 'Third Prize' },
+      { rank: '二等奖', name: 'AirPods耳机', count: 1, desc: '高感知度奖品，适合拉升现场期待值。', badge: 'Second Prize' },
+      { rank: '一等奖', name: 'ChatGPT会员（一年）', count: 1, desc: '实用度高，适合学生与家长共同感知价值。', badge: 'First Prize' },
+      { rank: '特等奖', name: '免费先修课 ×1【价值10000】', count: 1, desc: '本场最高奖项，适合放在最后压轴开奖。', badge: 'Grand Prize' }
     ];
 
+    const totalFamilies = 30;
+    let numberPool = [];
     let currentPrizeIndex = 0;
-    let timer = null;
+    let currentPrizeDrawnCount = 0;
+    let drawnTotal = 0;
+    let winners = [];
+    let rollingTimer = null;
+    let isRolling = false;
+    let currentDisplay = '01';
 
-    const mainDisplay = document.getElementById('mainDisplay');
-    const displayBoard = document.getElementById('displayBoard');
-    const prizeTitle = document.getElementById('prize-title');
-    const historyLog = document.getElementById('historyLog');
+    const prizeGrid = document.getElementById('prizeGrid');
+    const prizeProgress = document.getElementById('prizeProgress');
+    const winnerList = document.getElementById('winnerList');
+    const currentPrizeName = document.getElementById('currentPrizeName');
+    const currentPrizeRemain = document.getElementById('currentPrizeRemain');
+    const statusPill = document.getElementById('statusPill');
+    const rollingNumber = document.getElementById('rollingNumber');
+    const winnerLabel = document.getElementById('winnerLabel');
+    const winnerResult = document.getElementById('winnerResult');
+    const progressNote = document.getElementById('progressNote');
+    const drawnCount = document.getElementById('drawnCount');
+    const remainingCount = document.getElementById('remainingCount');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function padNumber(num) {
+      return String(num).padStart(2, '0');
+    }
+
+    function initNumberPool() {
+      numberPool = Array.from({ length: totalFamilies }, (_, i) => padNumber(i + 1));
+    }
+
+    function renderPrizeCards() {
+      prizeGrid.innerHTML = prizeConfig.map(item => `
+        <div class="card glass">
+          <div class="prize-badge">${item.badge}</div>
+          <h3 class="prize-name">${item.rank} · ${item.name}</h3>
+          <p class="prize-meta">${item.desc}</p>
+          <div class="prize-count">本档奖项数量：${item.count}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderPrizeProgress() {
+      prizeProgress.innerHTML = prizeConfig.map((item, index) => {
+        const wonInThisPrize = winners.filter(w => w.rank === item.rank).length;
+        const remain = item.count - wonInThisPrize;
+        const active = index === currentPrizeIndex;
+        return `
+          <div class="progress-item" style="${active ? 'box-shadow: 0 0 0 2px rgba(105,184,255,0.18) inset;' : ''}">
+            <div class="progress-left">
+              <div class="progress-name">${item.rank}</div>
+              <div class="progress-count">${item.name}</div>
+            </div>
+            <div class="progress-count">剩余 ${remain} / ${item.count}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderWinnerList() {
+      if (!winners.length) {
+        winnerList.innerHTML = '<div class="empty-state">当前还没有产生中奖号码</div>';
+        return;
+      }
+
+      winnerList.innerHTML = winners.slice().reverse().map(item => `
+        <div class="winner-item">
+          <div class="winner-item-left">
+            <div class="winner-rank">${item.rank}</div>
+            <div class="winner-prize">${item.prize}</div>
+          </div>
+          <div class="winner-number-badge">${item.number}号家庭</div>
+        </div>
+      `).join('');
+    }
+
+    function updateStatus() {
+      const currentPrize = prizeConfig[currentPrizeIndex];
+      const remainCurrent = currentPrize ? currentPrize.count - currentPrizeDrawnCount : 0;
+      currentPrizeName.textContent = currentPrize ? currentPrize.rank : '全部完成';
+      currentPrizeRemain.textContent = currentPrize ? remainCurrent : '0';
+      drawnCount.textContent = drawnTotal;
+      remainingCount.textContent = numberPool.length;
+      progressNote.textContent = currentPrize
+        ? `当前为第 ${drawnTotal + 1} / 13 次抽奖，剩余可抽号码 ${numberPool.length} 个`
+        : '全部奖项已抽取完成，中奖名单已生成。';
+      renderPrizeProgress();
+      renderWinnerList();
+
+      if (!currentPrize) {
+        startBtn.disabled = true;
+        stopBtn.disabled = true;
+        nextBtn.disabled = true;
+        statusPill.textContent = '已完成';
+        statusPill.className = 'status-pill running';
+        winnerLabel.textContent = '本场抽奖已结束';
+        winnerResult.textContent = '13 个中奖号码已全部抽出';
+      }
+    }
+
+    function setIdleState(message = '点击下方按钮开始本轮抽奖') {
+      isRolling = false;
+      clearInterval(rollingTimer);
+      rollingTimer = null;
+      stopBtn.disabled = true;
+      startBtn.disabled = !prizeConfig[currentPrizeIndex];
+      statusPill.textContent = '待开始';
+      statusPill.className = 'status-pill stopped';
+      winnerResult.textContent = message;
+    }
 
     function startRolling() {
-        if (currentPrizeIndex >= prizeConfig.length) return;
-        
-        document.getElementById('startBtn').disabled = true;
-        document.getElementById('stopBtn').disabled = false;
-        
-        // 清空展示区域，只留主显示文字
-        displayBoard.innerHTML = '<div class="name-card" id="activeDisplay"></div>';
-        const activeDisplay = document.getElementById('activeDisplay');
+      if (isRolling || !prizeConfig[currentPrizeIndex] || numberPool.length === 0) return;
+      isRolling = true;
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      nextBtn.disabled = true;
+      statusPill.textContent = '滚动中';
+      statusPill.className = 'status-pill running';
+      winnerLabel.textContent = `正在抽取 ${prizeConfig[currentPrizeIndex].rank}`;
+      winnerResult.textContent = '请在合适的时机点击“停止抽奖”';
 
-        timer = setInterval(() => {
-            const randomIndex = Math.floor(Math.random() * families.length);
-            activeDisplay.innerText = families[randomIndex];
-        }, 50);
+      rollingTimer = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * numberPool.length);
+        currentDisplay = numberPool[randomIndex];
+        rollingNumber.textContent = currentDisplay;
+      }, 70);
     }
 
     function stopRolling() {
-        clearInterval(timer);
-        document.getElementById('startBtn').disabled = false;
-        document.getElementById('stopBtn').disabled = true;
+      if (!isRolling) return;
+      clearInterval(rollingTimer);
+      rollingTimer = null;
+      isRolling = false;
 
-        const currentPrize = prizeConfig[currentPrizeIndex];
-        let winners = [];
+      const hitIndex = numberPool.indexOf(currentDisplay);
+      if (hitIndex !== -1) {
+        numberPool.splice(hitIndex, 1);
+      }
 
-        if (currentPrize.isMulti) {
-            // 五等奖一次性抽出6个
-            for (let i = 0; i < currentPrize.count; i++) {
-                const idx = Math.floor(Math.random() * families.length);
-                winners.push(families.splice(idx, 1)[0]);
-            }
-            showMultiWinners(winners, currentPrize.name);
-        } else {
-            // 其他奖项逐一抽出
-            const activeDisplay = document.getElementById('activeDisplay');
-            const winnerName = activeDisplay.innerText;
-            families = families.filter(f => f !== winnerName);
-            winners.push(winnerName);
-            logHistory(currentPrize.name, winnerName);
+      const currentPrize = prizeConfig[currentPrizeIndex];
+      winners.push({
+        rank: currentPrize.rank,
+        prize: currentPrize.name,
+        number: currentDisplay
+      });
+
+      currentPrizeDrawnCount += 1;
+      drawnTotal += 1;
+
+      winnerLabel.textContent = `${currentPrize.rank} 中奖号码`;
+      winnerResult.textContent = `${currentDisplay}号家庭 · 恭喜获得 ${currentPrize.name}`;
+      statusPill.textContent = '已锁定';
+      statusPill.className = 'status-pill stopped';
+      stopBtn.disabled = true;
+
+      if (currentPrizeDrawnCount >= currentPrize.count) {
+        nextBtn.disabled = currentPrizeIndex >= prizeConfig.length - 1;
+        startBtn.disabled = true;
+        if (currentPrizeIndex >= prizeConfig.length - 1) {
+          currentPrizeIndex += 1;
         }
+      } else {
+        startBtn.disabled = false;
+      }
 
-        currentPrizeIndex++;
-        updatePrizeUI();
+      updateStatus();
     }
 
-    function showMultiWinners(list, prizeName) {
-        displayBoard.innerHTML = ""; // 清空
-        list.forEach(name => {
-            const el = document.createElement('div');
-            el.className = "name-card multi-winner";
-            el.innerText = name;
-            displayBoard.appendChild(el);
-            logHistory(prizeName, name);
-        });
+    function goNextPrize() {
+      if (isRolling) return;
+      if (!prizeConfig[currentPrizeIndex]) return;
+
+      currentPrizeIndex += 1;
+      currentPrizeDrawnCount = 0;
+
+      const nextPrize = prizeConfig[currentPrizeIndex];
+      if (!nextPrize) {
+        updateStatus();
+        return;
+      }
+
+      rollingNumber.textContent = numberPool[0] || '--';
+      winnerLabel.textContent = `准备抽取 ${nextPrize.rank}`;
+      setIdleState(`当前奖项已切换为 ${nextPrize.rank}，点击开始继续抽奖`);
+      updateStatus();
     }
 
-    function logHistory(prize, name) {
-        const item = document.createElement('div');
-        item.className = "history-item";
-        item.innerHTML = `<span>${prize}</span> ${name}`;
-        historyLog.prepend(item);
+    function resetAll() {
+      if (!confirm('确认要重置本场抽奖吗？已产生的中奖结果会全部清空。')) return;
+      currentPrizeIndex = 0;
+      currentPrizeDrawnCount = 0;
+      drawnTotal = 0;
+      winners = [];
+      initNumberPool();
+      rollingNumber.textContent = '01';
+      winnerLabel.textContent = '准备开奖';
+      setIdleState('点击下方按钮开始本轮抽奖');
+      nextBtn.disabled = true;
+      updateStatus();
     }
 
-    function updatePrizeUI() {
-        if (currentPrizeIndex < prizeConfig.length) {
-            prizeTitle.innerText = `当前环节：${prizeConfig[currentPrizeIndex].name}`;
-        } else {
-            prizeTitle.innerText = "抽奖环节圆满结束";
-            document.getElementById('startBtn').disabled = true;
-            displayBoard.innerHTML = '<div class="name-card">祝大家学业有成！</div>';
-        }
-    }
-</script>
+    startBtn.addEventListener('click', startRolling);
+    stopBtn.addEventListener('click', stopRolling);
+    nextBtn.addEventListener('click', goNextPrize);
+    resetBtn.addEventListener('click', resetAll);
 
+    function init() {
+      initNumberPool();
+      renderPrizeCards();
+      renderPrizeProgress();
+      renderWinnerList();
+      updateStatus();
+      rollingNumber.textContent = '01';
+      setIdleState();
+    }
+
+    init();
+  </script>
 </body>
 </html>
