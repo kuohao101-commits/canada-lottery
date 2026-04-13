@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 加拿大本科新生见面会抽奖</title>
+    <style>
+        :root {
+            --u-blue: #002147; /* 经典学术蓝 */
+            --u-red: #C53030;  /* 枫叶红 */
+            --bg-gray: #f9fafb;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', 'PingFang SC', sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--u-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* 背景装饰：淡淡的枫叶元素 */
+            background-image: radial-gradient(circle at 90% 10%, rgba(197, 48, 48, 0.05) 0%, transparent 20%),
+                              radial-gradient(circle at 10% 90%, rgba(0, 33, 71, 0.05) 0%, transparent 20%);
+        }
+
+        .main-card {
+            background: white;
+            width: 900px;
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 10px 50px rgba(0, 33, 71, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 装饰线条 */
+        .main-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--u-blue), var(--u-red));
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        #prize-title {
+            font-size: 20px;
+            color: var(--u-red);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* 抽奖展示区 */
+        .display-area {
+            min-height: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .name-card {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--u-blue);
+            transition: all 0.2s;
+        }
+
+        .multi-winner {
+            font-size: 24px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 按钮控制 */
+        .btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 14px 45px;
+            font-size: 16px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-start { background: var(--u-blue); color: white; }
+        .btn-start:hover { background: #003366; transform: translateY(-2px); }
+        .btn-stop { background: var(--u-red); color: white; }
+        .btn-stop:hover { opacity: 0.9; }
+        button:disabled { background: #e2e8f0; color: #a0aec0; cursor: not-allowed; transform: none; }
+
+        /* 中奖记录 */
+        .history {
+            margin-top: 40px;
+            border-top: 1px solid #edf2f7;
+            padding-top: 20px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history h3 { font-size: 16px; color: #4a5568; }
+        .history-item { font-size: 14px; margin-bottom: 8px; color: #2d3748; }
+        .history-item span { color: var(--u-red); font-weight: bold; margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <header>
+        <div class="subtitle">Freshman Meetup · Undergraduate Canada</div>
+        <h1>2026 加拿大本科新生见面会抽奖</h1>
+        <div id="prize-title">当前环节：五等奖（磁吸卡套 x6）</div>
+    </header>
+
+    <div class="display-area" id="displayBoard">
+        <div class="name-card" id="mainDisplay">Ready</div>
+    </div>
+
+    <div class="btns">
+        <button id="startBtn" class="btn-start" onclick="startRolling()">开始抽奖</button>
+        <button id="stopBtn" class="btn-stop" onclick="stopRolling()" disabled>停止</button>
+    </div>
+
+    <div class="history">
+        <h3>荣誉名单 Winners List</h3>
+        <div id="historyLog"></div>
+    </div>
+</div>
+
+<script>
+    // 1. 初始化30组家庭名单
+    let families = Array.from({length: 30}, (_, i) => `家庭 ${i + 1}`);
+    
+    // 2. 奖品配置 (按抽取顺序排列)
+    // 重点：五等奖 count 为 6
+    const prizeConfig = [
+        { name: "五等奖 (磁吸卡套)", count: 6, isMulti: true }, 
+        { name: "四等奖 (Jellycat)", count: 1, isMulti: false },
+        { name: "四等奖 (Jellycat)", count: 1, isMulti: false },
+        { name: "三等奖 (1000代金券)", count: 1, isMulti: false },
+        { name: "三等奖 (1000代金券)", count: 1, isMulti: false },
+        { name: "二等奖 (Airpods耳机)", count: 1, isMulti: false },
+        { name: "一等奖 (ChatGPT会员)", count: 1, isMulti: false },
+        { name: "特等奖 (免费先修课)", count: 1, isMulti: false }
+    ];
+
+    let currentPrizeIndex = 0;
+    let timer = null;
+
+    const mainDisplay = document.getElementById('mainDisplay');
+    const displayBoard = document.getElementById('displayBoard');
+    const prizeTitle = document.getElementById('prize-title');
+    const historyLog = document.getElementById('historyLog');
+
+    function startRolling() {
+        if (currentPrizeIndex >= prizeConfig.length) return;
+        
+        document.getElementById('startBtn').disabled = true;
+        document.getElementById('stopBtn').disabled = false;
+        
+        // 清空展示区域，只留主显示文字
+        displayBoard.innerHTML = '<div class="name-card" id="activeDisplay"></div>';
+        const activeDisplay = document.getElementById('activeDisplay');
+
+        timer = setInterval(() => {
+            const randomIndex = Math.floor(Math.random() * families.length);
+            activeDisplay.innerText = families[randomIndex];
+        }, 50);
+    }
+
+    function stopRolling() {
+        clearInterval(timer);
+        document.getElementById('startBtn').disabled = false;
+        document.getElementById('stopBtn').disabled = true;
+
+        const currentPrize = prizeConfig[currentPrizeIndex];
+        let winners = [];
+
+        if (currentPrize.isMulti) {
+            // 五等奖一次性抽出6个
+            for (let i = 0; i < currentPrize.count; i++) {
+                const idx = Math.floor(Math.random() * families.length);
+                winners.push(families.splice(idx, 1)[0]);
+            }
+            showMultiWinners(winners, currentPrize.name);
+        } else {
+            // 其他奖项逐一抽出
+            const activeDisplay = document.getElementById('activeDisplay');
+            const winnerName = activeDisplay.innerText;
+            families = families.filter(f => f !== winnerName);
+            winners.push(winnerName);
+            logHistory(currentPrize.name, winnerName);
+        }
+
+        currentPrizeIndex++;
+        updatePrizeUI();
+    }
+
+    function showMultiWinners(list, prizeName) {
+        displayBoard.innerHTML = ""; // 清空
+        list.forEach(name => {
+            const el = document.createElement('div');
+            el.className = "name-card multi-winner";
+            el.innerText = name;
+            displayBoard.appendChild(el);
+            logHistory(prizeName, name);
+        });
+    }
+
+    function logHistory(prize, name) {
+        const item = document.createElement('div');
+        item.className = "history-item";
+        item.innerHTML = `<span>${prize}</span> ${name}`;
+        historyLog.prepend(item);
+    }
+
+    function updatePrizeUI() {
+        if (currentPrizeIndex < prizeConfig.length) {
+            prizeTitle.innerText = `当前环节：${prizeConfig[currentPrizeIndex].name}`;
+        } else {
+            prizeTitle.innerText = "抽奖环节圆满结束";
+            document.getElementById('startBtn').disabled = true;
+            displayBoard.innerHTML = '<div class="name-card">祝大家学业有成！</div>';
+        }
+    }
+</script>
+
+</body>
+</html>
