@@ -764,20 +764,21 @@
       <div class="hero-nav">
         <div class="brand">
           <div class="brand-mark">得</div>
-          <div>加拿大本科新生线下见面会</div>
+          <div>得知课堂</div>
         </div>
-        <div class="hero-tag">30组家庭专属抽奖 · 蓝白简约大屏版</div>
+        <div class="hero-tag">北京&上海 得知课堂专属抽奖</div>
       </div>
 
       <div class="hero-main">
         <div>
           <h1 class="headline">
-            <span>Welcome. Draw.</span>
-            <span>Celebrate. 好运现在开始。</span>
+            <span>加拿大本科新生见面会</span>
+            <span>抽奖现在开始！</span>
           </h1>
           <p class="subtext">
-            这是为加拿大本科新生线下见面会准备的现场抽奖专区。
-            本场共开放 30 组家庭参与抽奖，系统按奖项顺序依次开奖，中奖号码自动移出奖池，确保每组家庭仅可中奖一次。
+            感谢各位家长与同学莅临本次加拿大本科新生线下见面会。
+            很高兴今天能和大家在线下相见，也感谢大家对得知课堂的支持与信任。接下来进入现场幸运抽奖环节，
+            祝各位家长和同学都能收获一份惊喜与好运。
           </p>
           <div class="hero-actions">
             <button class="btn btn-primary" onclick="document.getElementById('lottery-section').scrollIntoView({behavior:'smooth'})">进入抽奖区</button>
@@ -788,8 +789,8 @@
 
         <div class="mock-stage">
           <div class="mock-card mock-main">
-            <div class="mock-pill">Live Draw Event</div>
-            <div class="mock-title">大屏现场抽奖版<br>从五等奖到特等奖依次开奖</div>
+            <div class="mock-pill">Lucky Draw Moment</div>
+            <div class="mock-title">现场幸运抽奖环节<br>感谢各位家长与同学莅临见面会</div>
             <div class="mock-line"></div>
             <div class="mock-line mid"></div>
             <div class="mock-line short"></div>
@@ -819,16 +820,16 @@
 
       <div class="hero-bottom">
         <div>抽奖顺序：五等奖 → 四等奖 → 三等奖 → 二等奖 → 一等奖 → 特等奖</div>
-        <div>页面支持：开始 / 停止抽奖、中奖名单实时记录、剩余奖品数展示、号码自动移除</div>
+        <div>现场抽奖仅展示中奖结果，号码抽出后自动移出奖池，确保每组家庭仅可中奖一次</div>
       </div>
     </section>
 
     <section class="section">
       <div class="section-title-wrap">
-        <h2 class="section-title">本场奖品设置</h2>
+        <h2 class="section-title">现场奖品设置</h2>
         <p class="section-desc">
-          本场线下见面会共设 6 档奖项，合计 13 个中奖名额。
-          页面会实时显示各奖项剩余数量，抽出后的号码将自动从奖池中移除，避免重复中奖。
+          为感谢各位家长与同学到场支持，本次加拿大本科新生见面会特别准备了现场专属抽奖福利。
+          本场共设 6 档奖项，合计 13 个中奖名额，中奖号码将实时记录并同步展示。
         </p>
       </div>
       <div class="prize-grid" id="prizeGrid"></div>
@@ -836,10 +837,10 @@
 
     <section class="section" id="lottery-section">
       <div class="section-title-wrap">
-        <h2 class="section-title">现场抽奖主控台</h2>
+        <h2 class="section-title">现场抽奖环节</h2>
         <p class="section-desc">
-          页面默认使用编号抽奖模式。活动开始前为 30 组家庭发放对应号码即可。
-          主持人点击“开始滚动”后，号码会在大屏中滚动；点击“停止抽奖”后，本轮中奖号码即锁定并自动计入对应奖项名单。
+          本场抽奖采用编号方式进行，活动开始前将为 30 组家庭发放对应号码。
+          主持人点击“开始滚动”后，号码会在大屏中滚动；点击“停止抽奖”后，本轮中奖号码即锁定并自动计入中奖名单，便于现场展示与后续记录分享。
         </p>
       </div>
 
@@ -856,7 +857,7 @@
 
           <div class="draw-stage">
             <div class="rolling-area">
-              <div class="rolling-tip">Canada Undergraduate Meetup Lucky Draw</div>
+              <div class="rolling-tip">Lucky Draw For Families & Students</div>
               <div class="winner-label" id="winnerLabel">准备开奖</div>
               <div class="rolling-number" id="rollingNumber">01</div>
               <div class="winner-result" id="winnerResult">点击下方按钮开始本轮抽奖</div>
@@ -875,7 +876,7 @@
 
         <div class="lottery-side">
           <div class="mini-card glass">
-            <h3 class="mini-title">现场总览</h3>
+            <h3 class="mini-title">本场抽奖总览</h3>
             <div class="stats-grid">
               <div class="stat-box">
                 <div class="stat-label">总号码数</div>
@@ -902,7 +903,7 @@
           </div>
 
           <div class="mini-card glass">
-            <h3 class="mini-title">已中奖名单</h3>
+            <h3 class="mini-title">现场中奖名单</h3>
             <div class="winner-list" id="winnerList">
               <div class="empty-state">当前还没有产生中奖号码</div>
             </div>
@@ -911,79 +912,13 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-title-wrap">
-        <h2 class="section-title">活动相关产品</h2>
-        <p class="section-desc">
-          页面保留了你提到的“产品介绍”区块，方便你在抽奖页里同步展示品牌服务与活动信息。
-          目前先用加本业务主力产品做演示，后续你可以直接替换文案。
-        </p>
-      </div>
-      <div class="product-grid">
-        <div class="card glass">
-          <div class="product-icon">📘</div>
-          <h3 class="card-title">新生选课咨询与规划</h3>
-          <p class="card-desc">帮助新生提前了解课程体系、专业方向与排课逻辑，降低开学后的信息差与试错成本。</p>
-        </div>
-        <div class="card glass">
-          <div class="product-icon">🎓</div>
-          <h3 class="card-title">暑期先修课</h3>
-          <p class="card-desc">围绕加本主流基础课程做衔接，帮助学生在正式开学前先建立知识框架与学习节奏。</p>
-        </div>
-        <div class="card glass">
-          <div class="product-icon">📈</div>
-          <h3 class="card-title">1v1稳分辅导</h3>
-          <p class="card-desc">针对课程难点、作业、Quiz、Midterm 与 Final 做同步陪跑，帮助学生稳住 GPA 与学习状态。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-title-wrap">
-        <h2 class="section-title">导师介绍</h2>
-        <p class="section-desc">
-          页面默认放入了 3 位适合当前加拿大本科业务场景的导师介绍。你后续可以替换头像、头衔、简介和展示顺序。
-        </p>
-      </div>
-      <div class="mentor-grid">
-        <div class="card glass">
-          <div class="mentor-head">
-            <div class="mentor-avatar">✨</div>
-            <div>
-              <h3 class="mentor-name">水晶学姐</h3>
-              <p class="mentor-role">多大统计 Specialist · GPA3.8+ · 学业规划导师</p>
-            </div>
-          </div>
-          <p class="mentor-text">擅长 GPA 逆袭、课程规划与学习节奏搭建，适合放在见面会活动页中增强专业感与信任感。</p>
-        </div>
-        <div class="card glass">
-          <div class="mentor-head">
-            <div class="mentor-avatar">💎</div>
-            <div>
-              <h3 class="mentor-name">Vicky学姐</h3>
-              <p class="mentor-role">UofT Commerce · Oxford 金融硕士</p>
-            </div>
-          </div>
-          <p class="mentor-text">擅长课程辅导、学习规划与陪跑式内容表达，适合在新生活动中做品牌老师展示与可信度背书。</p>
-        </div>
-        <div class="card glass">
-          <div class="mentor-head">
-            <div class="mentor-avatar">🧠</div>
-            <div>
-              <h3 class="mentor-name">宋老师</h3>
-              <p class="mentor-role">数学竞赛导师 · 长期主讲欧几里得方向</p>
-            </div>
-          </div>
-          <p class="mentor-text">适合补充品牌导师矩阵形象，让页面在抽奖之外仍保留完整的活动信息与机构专业感。</p>
-        </div>
-      </div>
-    </section>
+    
 
     <section class="section" id="faq-section">
       <div class="section-title-wrap">
-        <h2 class="section-title">FAQ</h2>
+        <h2 class="section-title">现场说明</h2>
         <p class="section-desc">
-          下面这部分已经按你的抽奖规则写成现场版 FAQ，方便你直接投屏或后续补充进活动落地页里。
+          下面这部分按现场家长和同学更容易理解的方式整理成简明说明，方便投屏展示，也方便后续保存为活动素材发布到社交平台。
         </p>
       </div>
       <div class="faq-grid">
@@ -997,14 +932,14 @@
         </div>
         <div class="faq-item glass">
           <h3 class="faq-question">Q3：抽奖顺序是怎样的？</h3>
-          <p class="faq-answer">页面默认按五等奖 → 四等奖 → 三等奖 → 二等奖 → 一等奖 → 特等奖的顺序依次开奖，便于现场氛围逐步提升。</p>
+          <p class="faq-answer">本场抽奖按五等奖 → 四等奖 → 三等奖 → 二等奖 → 一等奖 → 特等奖的顺序依次进行，方便现场节奏逐步推进。</p>
         </div>
         <div class="faq-item glass">
-          <h3 class="faq-question">Q4：会不会显示未中奖结果？</h3>
-          <p class="faq-answer">不会。页面只展示每轮抽中的中奖号码与最终中奖名单，不会逐一显示未中奖结果。</p>
+          <h3 class="faq-question">Q4：现场会显示未中奖结果吗？</h3>
+          <p class="faq-answer">不会。页面只展示中奖号码与最终中奖名单，不会逐一显示未中奖结果，整体视觉会更简洁，也更适合现场展示。</p>
         </div>
       </div>
-      <div class="bottom-note">现场使用建议：抽奖前先发放 01–30 号家庭编号牌，再以主持人统一操作大屏抽奖。</div>
+      <div class="bottom-note">感谢各位家长与同学莅临见面会，祝大家在接下来的抽奖环节中收获属于自己的好运与惊喜。</div>
     </section>
   </div>
 
